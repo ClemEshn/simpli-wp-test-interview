@@ -20,6 +20,8 @@ class SimpliCeremonyStreamingPlugin extends Singleton
         include_once plugin_dir_path( __FILE__ ).'/CeremonyStreaming.php';
         new CeremonyStreamingPlugin();
         register_block_type(plugin_dir_path( __FILE__ ) . '/build/demo');
+        register_block_type(plugin_dir_path( __FILE__ ) . '/build/clemblock');
+
     }
 
 }
@@ -40,9 +42,7 @@ function ClementNewPage() {
 
 register_activation_hook(__FILE__, __NAMESPACE__. '\\ClementNewPage');
 
-add_action('plugins_loaded', function () {
-    add_filter('the_content', __NAMESPACE__ . '\\ClementNewPageReplaceContent');
-});
+add_filter('the_content', __NAMESPACE__ . '\\ClementNewPageReplaceContent');
 
 function ClementNewPageReplaceContent($content) {
     if ( is_page('clements-new-page') ) {
