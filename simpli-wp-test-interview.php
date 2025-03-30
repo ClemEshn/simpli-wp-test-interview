@@ -40,17 +40,17 @@ function ClementNewPage() {
 
 register_activation_hook(__FILE__, __NAMESPACE__. '\\ClementNewPage');
 
-add_filter('the_content', __NAMESPACE__ . '\\ClementNewPageReplaceContent');
+add_action('plugins_loaded', function () {
+    add_filter('the_content', __NAMESPACE__ . '\\ClementNewPageReplaceContent');
+});
 
 function ClementNewPageReplaceContent($content) {
-	if (is_page('clements-new-page')) {
-        die("test");
+    if ( is_page('clements-new-page') ) {
+        ob_start();
+        include plugin_dir_path(__FILE__) . 'Views/ClementsNewPage.php';
+        return ob_get_clean();
+    }
 
-		ob_start();
-		include plugin_dir_path(__FILE__) . 'Views/ClementNewPage.php';
-		return ob_get_clean();
-	}
-
-	return $content;
+    return $content;
 }
 
