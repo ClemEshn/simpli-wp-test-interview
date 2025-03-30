@@ -42,6 +42,7 @@ function ClementNewPage() {
 
 register_activation_hook(__FILE__, __NAMESPACE__. '\\ClementNewPage');
 
+//I went for filter instead of a template because it was faster for this use case
 add_filter('the_content', __NAMESPACE__ . '\\ClementNewPageReplaceContent');
 
 function ClementNewPageReplaceContent($content) {

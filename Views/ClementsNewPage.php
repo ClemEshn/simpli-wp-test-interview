@@ -52,8 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cpf_nonce']) && wp_ve
     </div>
 </form>
 
+<!-- Amélioration : déplacement du style dans un fichier distint-->
 <style>
-
 .formDiv{
     display: grid; 
     grid-template-columns: 1fr 2fr; 

@@ -19,7 +19,7 @@
 	"attributes": {
 		"text": {
 			"type": "string",
-			"default" : "Hello World"
+			"default" : "Hello world"
 		},
 		"backgroundColor": {
 			"type": "string",
