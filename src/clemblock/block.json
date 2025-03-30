@@ -18,7 +18,16 @@
 	"viewScript": "file:./view.js",
 	"attributes": {
 		"text": {
-			"type": "string"
+			"type": "string",
+			"default" : "Hello World"
+		},
+		"backgroundColor": {
+			"type": "string",
+			"default": "#"
+		},
+		"borderStyle": {
+			"type": "string",
+			"default": "1px solid black"
 		}
 	}
 

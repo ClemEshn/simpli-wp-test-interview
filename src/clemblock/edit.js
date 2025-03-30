@@ -11,8 +11,8 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { RichText, useBlockProps } from '@wordpress/block-editor';
-
+import { useBlockProps, RichText, InspectorControls, PanelColorSettings } from '@wordpress/block-editor';
+import { PanelBody, TextControl } from '@wordpress/components';
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -30,13 +30,43 @@ import './editor.scss';
  * @return {Element} Element to render.
  */
 export default function Edit({ attributes, setAttributes }) {
+	const { text, backgroundColor, borderStyle } = attributes;
+
+	const blockProps = useBlockProps({
+		style: {
+			backgroundColor: backgroundColor,
+			border: borderStyle,
+			padding: '1rem'
+		}
+	});
 	return (
-		<RichText
-			{ ...useBlockProps() }
-			tagName="p"
-			value={attributes.text}
-			onChange={(newText) => setAttributes({ text: newText })}
-			placeholder={__('Anything but a palindrome...', 'clemblock')}
-		/>
+		<>
+			<InspectorControls>
+					<PanelBody title={__('Style du bloc', 'clemblock')} initialOpen={true}>
+						<PanelColorSettings
+							title={__('Background color', 'clemblock')}
+							colorSettings={[
+								{
+									value: backgroundColor,
+									onChange: (newColor) => setAttributes({ backgroundColor: newColor }),
+									label: __('Background color', 'clemblock'),
+								},
+							]}
+						/>
+						<TextControl
+							label={__('Border (ex: 1px solid red)', 'clemblock')}
+							value={borderStyle}
+							onChange={(newVal) => setAttributes({ borderStyle: newVal })}
+						/>
+					</PanelBody>
+				</InspectorControls>
+			<RichText
+				{ ...blockProps}
+				tagName="p"
+				value={text}
+				onChange={(newText) => setAttributes({ text: newText })}
+				placeholder={__('Anything but a palindrome...', 'clemblock')}
+			/>
+		</>
 	);
 }
